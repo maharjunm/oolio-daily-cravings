@@ -1,18 +1,27 @@
-import useAxiosApi from "../../hooks/useAxiosApi";
+import { observer } from "mobx-react";
 import { Flex } from "../../ui-library/flex";
 import { SpinnerLoader } from "../../ui-library/loader";
 import { Product } from "../common/product";
 import { ProductContainer } from "./styles";
+import useStores from "../../stores/useStores";
+import { useEffect } from "react";
 
-export const Products = () => {
-  const { data: products, loading: productsLoading } = useAxiosApi({
-    url: "/products",
-    method: "GET",
-  });
+export const Products = observer(() => {
+  const {
+    productsStore: { productsPreview, products, getProducts },
+  } = useStores();
+
+  console.log(products)
+
+  useEffect(() => {
+    if (productsPreview === "idle" || productsPreview == "failed") {
+      getProducts();
+    }
+  }, [getProducts, productsPreview]);
 
   return (
     <ProductContainer flexGrow wrap gap="1rem">
-      {productsLoading ? (
+      {productsPreview === "loading" ? (
         <Flex centered flexGrow>
           <SpinnerLoader />
         </Flex>
@@ -23,4 +32,4 @@ export const Products = () => {
       )}
     </ProductContainer>
   );
-};
+});
