@@ -17,4 +17,5 @@ export const theme = {
   countTextColor: "#C68C7B",
   orderTotalColor: "#483A37",
   deliveryTypeBgColor: "#FBF7F4",
+  pageBackground: "#fcf8f5",
 };

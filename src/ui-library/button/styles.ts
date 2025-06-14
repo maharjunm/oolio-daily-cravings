@@ -3,10 +3,21 @@ import { theme } from "../../assets/styles/theme";
 
 export const StyledButton = styled.button<{
   isPrimary?: boolean;
+  disabled?: boolean;
   width?: string;
   height?: string;
   borderRadius?: string;
 }>`
+  ${({ disabled }) => {
+    if (disabled) {
+      return `
+      opacity: 0.6;
+      cursor: not-allowed;
+      pointer-events: none;
+      `;
+    }
+    return "";
+  }}
   ${({ isPrimary, width, height }) => {
     return isPrimary
       ? `

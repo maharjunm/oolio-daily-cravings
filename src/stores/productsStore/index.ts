@@ -4,7 +4,6 @@ import { axiosInstance } from "../../interceptors/http";
 import type { PreviewState } from "../types";
 
 export default class ProductsStore implements IProductsStore {
-
   @observable products?: Product[];
   @observable productsPreview: PreviewState = "idle";
 
@@ -20,6 +19,11 @@ export default class ProductsStore implements IProductsStore {
     } finally {
       this.productsPreview = "loaded";
     }
+  }
+
+  @action.bound
+  getProductById(id: string) {
+    return this?.products?.find((p) => p.id === id);
   }
 
   constructor() {

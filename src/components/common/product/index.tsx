@@ -1,3 +1,4 @@
+import { observer } from "mobx-react";
 import Img, { type IconNames } from "../../../assets/icons/img";
 import { theme } from "../../../assets/styles/theme";
 import { Button } from "../../../ui-library/button";
@@ -21,10 +22,22 @@ interface Props {
     mobile: string;
   };
   isSelected?: boolean;
+  decreaseCartItemCount: () => void;
+  increaseCartItemCount: () => void;
+  count: number;
 }
 
-export const Product = (props: Props) => {
-  const { name, category, price, image, isSelected } = props;
+export const Product = observer((props: Props) => {
+  const {
+    name,
+    category,
+    price,
+    image,
+    isSelected,
+    increaseCartItemCount,
+    decreaseCartItemCount,
+    count,
+  } = props;
 
   return (
     <Flex flexDirection="column" gap="1.5rem">
@@ -39,14 +52,15 @@ export const Product = (props: Props) => {
             height="44px"
             width="160px"
             isPrimary={isSelected}
+            onClick={!isSelected ? increaseCartItemCount : () => {}}
             name={
               isSelected ? (
                 <Flex flexGrow justifyContent="space-between">
-                  <IconContainer centered>
+                  <IconContainer onClick={decreaseCartItemCount} centered>
                     <SmallText color="white">-</SmallText>
                   </IconContainer>
-                  <SmallText color="white">2</SmallText>
-                  <IconContainer centered>
+                  <SmallText color="white">{count}</SmallText>
+                  <IconContainer onClick={increaseCartItemCount} centered>
                     <SmallText color="white">+</SmallText>{" "}
                   </IconContainer>
                 </Flex>
@@ -75,4 +89,4 @@ export const Product = (props: Props) => {
       </Flex>
     </Flex>
   );
-};
+});

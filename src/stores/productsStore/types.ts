@@ -17,4 +17,5 @@ export interface IProductsStore {
   products?: Product[];
   productsPreview: PreviewState;
   getProducts: () => Promise<void>;
+  getProductById: (id: string) => Product | undefined;
 }

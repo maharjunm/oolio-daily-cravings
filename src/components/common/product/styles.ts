@@ -7,8 +7,9 @@ export const ProductContainer = styled(Flex)<{ isSelected: boolean }>`
   height: 240px;
   border-radius: 4px;
   position: relative;
-  ${({ isSelected }) =>
-    isSelected ? `border: 2px solid ${theme.colorBorderPrimary}` : ""}
+  border: 2px solid
+    ${({ isSelected }) =>
+      isSelected ? theme.colorBorderPrimary : theme.pageBackground};
 `;
 
 export const ButtonContainer = styled(Flex)`

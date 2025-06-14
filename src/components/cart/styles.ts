@@ -16,7 +16,7 @@ export const EmptyCartContainer = styled(Flex)`
 
 export const ItemsContainer = styled(Flex)`
   border-radius: 12px;
-  max-height: 350px;
+  height: 350px;
   overflow: auto;
 `;
 

@@ -9,9 +9,8 @@ import { useEffect } from "react";
 export const Products = observer(() => {
   const {
     productsStore: { productsPreview, products, getProducts },
+    cartStore: { cartItems, increaseCartItemCount, decreaseCartItemCount },
   } = useStores();
-
-  console.log(products)
 
   useEffect(() => {
     if (productsPreview === "idle" || productsPreview == "failed") {
@@ -26,8 +25,17 @@ export const Products = observer(() => {
           <SpinnerLoader />
         </Flex>
       ) : (
-        (products || []).map((p, index: number) => {
-          return <Product isSelected={index % 2 == 0} {...p} />;
+        (products || []).map((p) => {
+          return (
+            <Product
+              increaseCartItemCount={() => increaseCartItemCount(p.id)}
+              decreaseCartItemCount={() => decreaseCartItemCount(p.id)}
+              key={p.id}
+              isSelected={cartItems ? !!cartItems[p.id] : false}
+              count={cartItems ? cartItems[p.id] : 0}
+              {...p}
+            />
+          );
         })
       )}
     </ProductContainer>

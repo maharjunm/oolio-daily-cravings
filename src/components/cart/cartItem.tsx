@@ -4,13 +4,20 @@ import { BaseText, XSmallText } from "../../ui-library/typography";
 import { BreakLine, CrossIconContainer, Icon, ItemContainer } from "./styles";
 
 interface Props {
-  name: string;
+  name?: string;
   count: number;
   price: number;
   isLast: boolean;
+  removeItemFromCart: () => void;
 }
 
-export const CartItem = ({ name, count, price, isLast }: Props) => {
+export const CartItem = ({
+  name,
+  count,
+  price,
+  isLast,
+  removeItemFromCart,
+}: Props) => {
   return (
     <Flex flexDirection="column">
       <ItemContainer flexGrow justifyContent="space-between" alignItemsCenter>
@@ -38,7 +45,7 @@ export const CartItem = ({ name, count, price, isLast }: Props) => {
             </Flex>
           </Flex>
         </Flex>
-        <CrossIconContainer centered>
+        <CrossIconContainer onClick={removeItemFromCart} centered>
           <Icon color={theme.colorBorderSecondary}>{"x"}</Icon>
         </CrossIconContainer>
       </ItemContainer>
