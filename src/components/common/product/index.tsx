@@ -10,15 +10,21 @@ import {
 import { ButtonContainer, IconContainer, ProductContainer } from "./styles";
 
 interface Props {
+  id: string;
   name: string;
-  type: string;
+  category: string;
   price: number;
-  img: string;
+  image: {
+    desktop: string;
+    thumbnail: string;
+    tablet: string;
+    mobile: string;
+  };
   isSelected?: boolean;
 }
 
 export const Product = (props: Props) => {
-  const { name, type, price, img, isSelected } = props;
+  const { name, category, price, image, isSelected } = props;
 
   return (
     <Flex flexDirection="column" gap="1.5rem">
@@ -27,7 +33,7 @@ export const Product = (props: Props) => {
         flexDirection="column"
         gap="1rem"
       >
-        <Img name={img as IconNames} />
+        <img src={image.desktop} />
         <ButtonContainer justifyContentCenter>
           <Button
             height="44px"
@@ -39,13 +45,13 @@ export const Product = (props: Props) => {
                   <IconContainer centered>
                     <SmallText color="white">-</SmallText>
                   </IconContainer>
-                  <SmallText color={theme.colorTextSecondary}>2</SmallText>
+                  <SmallText color="white">2</SmallText>
                   <IconContainer centered>
                     <SmallText color="white">+</SmallText>{" "}
                   </IconContainer>
                 </Flex>
               ) : (
-                <Flex alignItemsCenter gap="0.5rem">
+                <Flex centered gap="0.5rem">
                   <Img name="add-cart" />
                   <BaseText color={theme.colorTextPrimary}>
                     Add to Cart
@@ -58,7 +64,7 @@ export const Product = (props: Props) => {
       </ProductContainer>
       <Flex flexDirection="column">
         <XSmallText color={theme.colorTextDescription} fontWeight={600}>
-          {type}
+          {category}
         </XSmallText>
         <BaseText color={theme.colorTextPrimary} fontWeight={600}>
           {name}
