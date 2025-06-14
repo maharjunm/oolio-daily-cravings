@@ -1,15 +1,16 @@
-import { Button } from './ui-library/button'
-import { H1 } from './ui-library/typography'
+import { Cart } from "./components/common/cart";
+import { Page } from "./components/common/page";
+import { Product } from "./components/common/product";
+import { OrderConfirmation } from "./components/common/orderConfirmation";
 
 function App() {
-
   return (
-    <>
-    <H1>Desserts</H1>
-    <Button name="test" isPrimary />
-    <Button name="test" />
-    </>
-  )
+    <Page>
+      <Cart />
+      <Product />
+      <OrderConfirmation />
+    </Page>
+  );
 }
 
-export default App
+export default App;

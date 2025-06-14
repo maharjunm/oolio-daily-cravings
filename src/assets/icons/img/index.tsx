@@ -1,7 +1,10 @@
-import React from 'react';
-import AddCartIcon from './cart-icon.png';
+import React from "react";
+import AddCartIcon from "./cart-icon.png";
+import EmptyCart from "./empty-cart.png";
+import Product from "./product.png";
+import Tick from "./tick.png";
 
-export type IconNames = 'add-cart';
+export type IconNames = "add-cart" | "empty-cart" | "product" | "tick";
 export interface SvgProps extends React.SVGAttributes<unknown> {
   name: IconNames;
   size?: number;
@@ -10,10 +13,18 @@ export interface SvgProps extends React.SVGAttributes<unknown> {
 const Img = ({ name, size, ...svgProps }: SvgProps) => {
   let Image;
   switch (name) {
-    case 'add-cart':
+    case "add-cart":
       Image = AddCartIcon;
       break;
-    
+    case "empty-cart":
+      Image = EmptyCart;
+      break;
+    case "tick":
+      Image = Tick;
+      break;
+    case "product":
+      Image = Product;
+      break;
     default:
       handleDefault(name);
       break;
@@ -24,7 +35,7 @@ const Img = ({ name, size, ...svgProps }: SvgProps) => {
       height: size,
     }) ||
     {};
-  return Image ? <img src={AddCartIcon} {...sizeProps} {...svgProps} /> : <div />;
+  return Image ? <img src={Image} {...sizeProps} {...svgProps} /> : <div />;
 };
 
 const handleDefault = (name: never) => {
