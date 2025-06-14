@@ -14,7 +14,12 @@ export const Button = ({
   borderRadius?: string;
 }) => {
   return (
-    <StyledButton borderRadius={borderRadius} width={width} height={height} isPrimary={isPrimary}>
+    <StyledButton
+      borderRadius={borderRadius}
+      width={width}
+      height={height}
+      isPrimary={isPrimary}
+    >
       {name}
     </StyledButton>
   );

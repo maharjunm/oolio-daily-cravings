@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Flex } from "../../../ui-library/flex";
-import { theme } from "../../../assets/styles/theme";
-import { BaseText } from "../../../ui-library/typography";
+import { Flex } from "../../ui-library/flex";
+import { theme } from "../../assets/styles/theme";
+import { BaseText } from "../../ui-library/typography";
 
 export const Container = styled(Flex)`
   padding: 16px;

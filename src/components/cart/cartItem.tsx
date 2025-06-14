@@ -1,6 +1,6 @@
-import { theme } from "../../../assets/styles/theme";
-import { Flex } from "../../../ui-library/flex";
-import { BaseText, XSmallText } from "../../../ui-library/typography";
+import { theme } from "../../assets/styles/theme";
+import { Flex } from "../../ui-library/flex";
+import { BaseText, XSmallText } from "../../ui-library/typography";
 import { BreakLine, CrossIconContainer, Icon, ItemContainer } from "./styles";
 
 interface Props {

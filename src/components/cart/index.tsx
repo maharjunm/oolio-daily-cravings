@@ -1,13 +1,3 @@
-import Img from "../../../assets/icons/img";
-import { theme } from "../../../assets/styles/theme";
-import { Button } from "../../../ui-library/button";
-import { Flex } from "../../../ui-library/flex";
-import {
-  H2,
-  H3,
-  SmallText,
-  XSmallText,
-} from "../../../ui-library/typography";
 import { CartItem } from "./cartItem";
 import { CartCouponCode } from "./cartCouponCode";
 import {
@@ -17,6 +7,11 @@ import {
   ItemsContainer,
   OrderTotalContainer,
 } from "./styles";
+import { H2, H3, SmallText, XSmallText } from "../../ui-library/typography";
+import Img from "../../assets/icons/img";
+import { theme } from "../../assets/styles/theme";
+import { Flex } from "../../ui-library/flex";
+import { Button } from "../../ui-library/button";
 
 const items = [
   {

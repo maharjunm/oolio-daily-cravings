@@ -1,5 +1,5 @@
 import { Page } from "./components/common/page";
-import { Home } from "./components/pages/home";
+import { Home } from "./pages/home";
 
 function App() {
   return (

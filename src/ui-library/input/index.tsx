@@ -1,9 +1,9 @@
 import { StyledInput } from "./styles";
 
 interface Props {
-    value: string; 
-    updateValue: (value: string) => void;
-    placeholder: string;
+  value: string;
+  updateValue: (value: string) => void;
+  placeholder: string;
 }
 
 export const Input = ({ value, updateValue, placeholder }: Props) => {

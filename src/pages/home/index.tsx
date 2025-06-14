@@ -1,7 +1,7 @@
-import { Flex } from "../../../ui-library/flex";
-import { H1 } from "../../../ui-library/typography";
-import { Cart } from "../../common/cart";
-import { Product } from "../../common/product";
+import { Cart } from "../../components/cart";
+import { Product } from "../../components/common/product";
+import { Flex } from "../../ui-library/flex";
+import { H1 } from "../../ui-library/typography";
 import { ProductContainer } from "./styles";
 
 const products = [

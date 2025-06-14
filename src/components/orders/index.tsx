@@ -1,14 +1,14 @@
-import Img, { type IconNames } from "../../../assets/icons/img";
-import { theme } from "../../../assets/styles/theme";
-import { Button } from "../../../ui-library/button";
-import { Flex } from "../../../ui-library/flex";
-import { Modal } from "../../../ui-library/modal";
+import Img, { type IconNames } from "../../assets/icons/img";
+import { theme } from "../../assets/styles/theme";
+import { Button } from "../../ui-library/button";
+import { Flex } from "../../ui-library/flex";
+import { Modal } from "../../ui-library/modal";
 import {
   BaseText,
   H1,
   SmallText,
   XSmallText,
-} from "../../../ui-library/typography";
+} from "../../ui-library/typography";
 import {
   BreakLine,
   Container,

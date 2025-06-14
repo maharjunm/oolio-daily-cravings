@@ -57,9 +57,15 @@ export const Product = (props: Props) => {
         </ButtonContainer>
       </ProductContainer>
       <Flex flexDirection="column">
-        <XSmallText color={theme.colorTextDescription} fontWeight={600}>{type}</XSmallText>
-        <BaseText color={theme.colorTextPrimary} fontWeight={600}>{name}</BaseText>
-        <BaseText color={theme.buttonTextPrimary} fontWeight={600}>${price}</BaseText>
+        <XSmallText color={theme.colorTextDescription} fontWeight={600}>
+          {type}
+        </XSmallText>
+        <BaseText color={theme.colorTextPrimary} fontWeight={600}>
+          {name}
+        </BaseText>
+        <BaseText color={theme.buttonTextPrimary} fontWeight={600}>
+          ${price}
+        </BaseText>
       </Flex>
     </Flex>
   );
