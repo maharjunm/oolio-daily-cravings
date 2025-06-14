@@ -5,14 +5,16 @@ export const Button = ({
   isPrimary,
   height,
   width,
+  borderRadius,
 }: {
   name: React.ReactNode;
   isPrimary?: boolean;
   height?: string;
   width?: string;
+  borderRadius?: string;
 }) => {
   return (
-    <StyledButton width={width} height={height} isPrimary={isPrimary}>
+    <StyledButton borderRadius={borderRadius} width={width} height={height} isPrimary={isPrimary}>
       {name}
     </StyledButton>
   );

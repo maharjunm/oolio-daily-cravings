@@ -10,8 +10,11 @@ export const theme = {
   colorTextTertiary: "#A49995",
   colorBorderPrimary: "#B84220",
   colorBorderSecondary: "#B2A8A6",
+  colorBorderTertiary: "#B84120",
   buttonTextPrimary: "#E7AB91",
   buttonTextSecondary: "#766F6D",
   orderBackground: "#C9C0BD",
   countTextColor: "#C68C7B",
+  orderTotalColor: "#483A37",
+  deliveryTypeBgColor: "#FBF7F4",
 };

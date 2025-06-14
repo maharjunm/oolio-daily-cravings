@@ -23,6 +23,14 @@ export const H2 = styled.h2`
   margin: 0;
 `;
 
+export const H3 = styled.h3`
+  font-family: RedHatText;
+  font-size: 24px;
+  font-weight: 600;
+  color: ${theme.orderTotalColor};
+  margin: 0;
+`;
+
 export const BaseText = styled.span<{
   color?: string;
   fontWeight?: FontWeightType;
