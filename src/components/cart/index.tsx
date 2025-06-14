@@ -5,15 +5,15 @@ import {
   DeliveryTypeContainer,
   EmptyCartContainer,
   ItemsContainer,
-  OrderTotalContainer,
 } from "./styles";
-import { H2, H3, SmallText, XSmallText } from "../../ui-library/typography";
+import { H2, SmallText, XSmallText } from "../../ui-library/typography";
 import Img from "../../assets/icons/img";
 import { theme } from "../../assets/styles/theme";
 import { Flex } from "../../ui-library/flex";
 import { Button } from "../../ui-library/button";
 import { observer } from "mobx-react";
 import useStores from "../../stores/useStores";
+import { OrderTotal } from "../common/orderTotal";
 
 export const Cart = observer(() => {
   const {
@@ -24,6 +24,7 @@ export const Cart = observer(() => {
       totalValueOfCartItems,
     },
     productsStore: { getProductById },
+    orderStore: { placeOrder, orderPreview },
   } = useStores();
   const cartItemsIds = Object.keys(cartItems || {});
   return (
@@ -58,16 +59,7 @@ export const Cart = observer(() => {
       )}
       {totalCartItems !== 0 && (
         <>
-          <OrderTotalContainer
-            flexGrow
-            alignItemsCenter
-            justifyContent="space-between"
-          >
-            <XSmallText color={theme.colorTextDescription} fontWeight={600}>
-              Order Total
-            </XSmallText>
-            <H3 color={theme.orderTotalColor}>${totalValueOfCartItems}</H3>
-          </OrderTotalContainer>
+          <OrderTotal total={totalValueOfCartItems} />
           <CartCouponCode />
           <DeliveryTypeContainer alignSelfCenter centered gap="0.25rem">
             <Img name="tree" />
@@ -92,7 +84,8 @@ export const Cart = observer(() => {
           </DeliveryTypeContainer>
           <Flex flexGrow justifyContentCenter>
             <Button
-              disabled={totalCartItems === 0}
+              onClick={placeOrder}
+              disabled={totalCartItems === 0 || orderPreview === "loading"}
               name="Confirm Your Order"
               isPrimary
             />

@@ -10,15 +10,19 @@ export const Container = styled(Flex)`
   max-height: 80vh;
 `;
 
-export const ItemsContainer = styled(Flex)`
-  background: ${theme.orderBackground};
+export const OrderContainer = styled(Flex)`
   border-radius: 12px;
+  background: ${theme.pageBackground};
+  overflow: auto;
+`;
+
+export const ItemsContainer = styled(Flex)`
   max-height: 400px;
   overflow: auto;
 `;
 
 export const ItemContainer = styled(Flex)<{ isLast: boolean }>`
-  background: ${theme.orderBackground};
+  background: ${theme.pageBackground};
   padding: 16px;
 `;
 

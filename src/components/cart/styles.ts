@@ -24,10 +24,6 @@ export const ItemContainer = styled(Flex)`
   padding: 16px;
 `;
 
-export const OrderTotalContainer = styled(Flex)`
-  padding: 16px;
-`;
-
 export const BreakLine = styled(Flex)`
   border: 0.5px solid ${theme.colorBorderSecondary};
   width: 80%;

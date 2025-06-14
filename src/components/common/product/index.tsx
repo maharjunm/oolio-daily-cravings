@@ -25,6 +25,7 @@ interface Props {
   decreaseCartItemCount: () => void;
   increaseCartItemCount: () => void;
   count: number;
+  disabled: boolean;
 }
 
 export const Product = observer((props: Props) => {
@@ -37,6 +38,7 @@ export const Product = observer((props: Props) => {
     increaseCartItemCount,
     decreaseCartItemCount,
     count,
+    disabled,
   } = props;
 
   return (
@@ -49,6 +51,7 @@ export const Product = observer((props: Props) => {
         <img src={image.desktop} />
         <ButtonContainer justifyContentCenter>
           <Button
+            disabled={disabled}
             height="44px"
             width="160px"
             isPrimary={isSelected}

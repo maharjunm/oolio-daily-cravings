@@ -7,6 +7,11 @@ export default class CartStore implements ICartStore {
   @observable cartItems: CartItems = {};
 
   @action.bound
+  resetStore() {
+    this.cartItems = {};
+  }
+
+  @action.bound
   increaseCartItemCount(id: string) {
     if (this.cartItems[id]) {
       this.cartItems[id] = this.cartItems[id] + 1;

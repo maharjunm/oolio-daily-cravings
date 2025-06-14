@@ -8,6 +8,7 @@ export interface ICartStore {
   increaseCartItemCount: (id: string) => void;
   decreaseCartItemCount: (id: string) => void;
   removeItemFromCart: (id: string) => void;
+  resetStore: () => void;
   totalCartItems: number;
   totalValueOfCartItems: number;
 }

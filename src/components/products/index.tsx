@@ -10,6 +10,7 @@ export const Products = observer(() => {
   const {
     productsStore: { productsPreview, products, getProducts },
     cartStore: { cartItems, increaseCartItemCount, decreaseCartItemCount },
+    orderStore: { orderPreview }
   } = useStores();
 
   useEffect(() => {
@@ -28,6 +29,7 @@ export const Products = observer(() => {
         (products || []).map((p) => {
           return (
             <Product
+              disabled={orderPreview === 'loading'}
               increaseCartItemCount={() => increaseCartItemCount(p.id)}
               decreaseCartItemCount={() => decreaseCartItemCount(p.id)}
               key={p.id}

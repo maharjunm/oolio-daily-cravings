@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const StyledLoader = styled.div`
   border: 8px solid #f3f3f3;
@@ -26,4 +26,34 @@ export const StyledLoader = styled.div`
       transform: rotate(360deg);
     }
   }
+`;
+
+const loadingAnimation = keyframes`
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+`;
+
+export const LoaderBar = styled.div<{ isVisible?: boolean }>`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #6200ee, #03dac6, #6200ee);
+  z-index: 9999;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    animation: ${loadingAnimation} 1.5s linear infinite;
+  }
+
+  opacity: ${(props) => (props.isVisible ? 1 : 0)};
+  transition: opacity 0.3s ease-in-out;
 `;
