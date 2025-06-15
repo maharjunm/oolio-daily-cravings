@@ -1,6 +1,7 @@
-import useStores from "../../../stores/useStores";
+
 import { useEffect, useState } from "react";
-import { OrderConfirmation } from "..";
+import { OrderConfirmation } from "../components/orders";
+import useStores from "../stores/useStores";
 
 export const useOrderConfirmation = () => {
   const [showModal, setShowModal] = useState(false);
