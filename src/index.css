@@ -45,3 +45,8 @@ body {
   font-style: normal;
   font-display: swap;
 }
+
+
+.lineThrough {
+  text-decoration:  line-through;
+}

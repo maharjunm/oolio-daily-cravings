@@ -1,14 +1,32 @@
 import { action, makeObservable, observable } from "mobx";
 import type { ICartStore, CartItems } from "./types";
 import type { IRootStore } from "../types";
+import type { Product } from "../productsStore/types";
+
+export enum COUPON_CODES {
+  HAPPYHOURS = "HAPPYHOURS",
+  BUYGETONE = "BUYGETONE",
+}
+
+const defaultCoupon = {
+  code: "",
+  errorMessage: "",
+  successMessage: "",
+};
 
 export default class CartStore implements ICartStore {
   @observable rootStore;
   @observable cartItems: CartItems = {};
+  @observable coupon = defaultCoupon;
+  @observable validCoupon = false;
+  @observable discountedProduct?: Product;
 
   @action.bound
   resetStore() {
     this.cartItems = {};
+    this.coupon = defaultCoupon;
+    this.discountedProduct = undefined;
+    this.validCoupon = false;
   }
 
   @action.bound
@@ -18,6 +36,18 @@ export default class CartStore implements ICartStore {
     } else {
       this.cartItems[id] = 1;
     }
+  }
+
+  get disountedTotal() {
+    if (this.coupon.code === COUPON_CODES.HAPPYHOURS) {
+      return (
+        this.totalValueOfCartItems -
+        this.totalValueOfCartItems * 0.18
+      ).toFixed(2);
+    }
+    return this.discountedProduct
+      ? (this.totalCartItems - this.discountedProduct?.price).toFixed(2)
+      : "";
   }
 
   @action.bound
@@ -51,6 +81,35 @@ export default class CartStore implements ICartStore {
       }, 0);
     }
     return 0;
+  }
+
+  @action.bound
+  updateMessage(field: string, message: string) {
+    this.coupon[field as keyof typeof this.coupon] = message;
+  }
+
+  @action.bound
+  applyCoupon() {
+    const { productsStore } = this.rootStore;
+    if (this.coupon.code === COUPON_CODES.BUYGETONE) {
+      if (this.totalCartItems > 2) {
+        const mappedProducts = Object.keys(this.cartItems).map((id) => {
+          return productsStore.getProductById(id);
+        });
+        const sortedByPrice = mappedProducts.sort(
+          (a?: Product, b?: Product) => {
+            if (a && b) {
+              return a?.price > b?.price ? 1 : -1;
+            }
+            return 0;
+          }
+        );
+        this.validCoupon = true;
+        this.discountedProduct = sortedByPrice[0];
+      }
+    } else if (this.coupon.code === COUPON_CODES.HAPPYHOURS) {
+      this.validCoupon = true;
+    }
   }
 
   constructor(rootStore: IRootStore) {

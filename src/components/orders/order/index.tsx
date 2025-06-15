@@ -24,7 +24,7 @@ export const Order = ({
         alignItemsCenter
       >
         <Flex gap="0.5rem">
-          <img height={"48px"} width={"48px"} src={item.image.desktop} />
+          <img height={"48px"} width={"48px"} src={item.image.thumbnail} />
           <Flex flexDirection="column" gap="0.25rem">
             <XSmallText fontWeight={600}>{item.name}</XSmallText>
             <Flex alignItemsCenter gap="0.5rem">

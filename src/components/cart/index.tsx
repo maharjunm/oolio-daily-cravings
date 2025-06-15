@@ -22,6 +22,8 @@ export const Cart = observer(() => {
       cartItems,
       removeItemFromCart,
       totalValueOfCartItems,
+      disountedTotal,
+      validCoupon,
     },
     productsStore: { getProductById },
     orderStore: { placeOrder, orderPreview },
@@ -59,7 +61,10 @@ export const Cart = observer(() => {
       )}
       {totalCartItems !== 0 && (
         <>
-          <OrderTotal total={totalValueOfCartItems} />
+          <OrderTotal
+            total={totalValueOfCartItems}
+            disountedTotal={validCoupon ? disountedTotal : ""}
+          />
           <CartCouponCode />
           <DeliveryTypeContainer alignSelfCenter centered gap="0.25rem">
             <Img name="tree" />

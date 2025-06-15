@@ -3,17 +3,8 @@ import Img from "../../assets/icons/img";
 import { theme } from "../../assets/styles/theme";
 import { Button } from "../../ui-library/button";
 import { Modal } from "../../ui-library/modal";
-import {
-  BaseText,
-  H1,
-  SmallText,
-} from "../../ui-library/typography";
-import {
-  BreakLine,
-  Container,
-  ItemsContainer,
-  OrderContainer,
-} from "./styles";
+import { BaseText, H1, SmallText } from "../../ui-library/typography";
+import { BreakLine, Container, ItemsContainer, OrderContainer } from "./styles";
 import useStores from "../../stores/useStores";
 import { OrderTotal } from "../common/orderTotal";
 import { Order } from "./order";
@@ -63,7 +54,12 @@ export const OrderConfirmation = observer(
               })}
             </ItemsContainer>
             <BreakLine alignSelfCenter />
-            <OrderTotal total={cartStore.totalValueOfCartItems} />
+            <OrderTotal
+              disountedTotal={
+                cartStore.validCoupon ? cartStore.disountedTotal : ""
+              }
+              total={cartStore.totalValueOfCartItems}
+            />
           </OrderContainer>
           <Button
             height="30px"
