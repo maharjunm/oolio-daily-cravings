@@ -68,6 +68,7 @@ The backend server should now be running on http://localhost:3000. You can confi
 #### Navigate to your frontend project directory:
 
 ```
+git clone https://github.com/maharjunm/oolio-daily-cravings
 cd oolio-daily-cravings
 ```
 
