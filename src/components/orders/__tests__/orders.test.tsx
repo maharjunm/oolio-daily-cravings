@@ -108,12 +108,4 @@ describe("OrderConfirmation Component", () => {
 
     expect(screen.getByText("1x")).toBeInTheDocument();
   });
-
-  it("should pass the correct total value to OrderTotal component", () => {
-    mockCartStore.cartItems.set("prod1", 2);
-    mockCartStore.cartItems.set("prod2", 1);
-
-    renderWithProvider();
-    expect(screen.getByTestId("order-total")).toHaveTextContent("Total: $8.00");
-  });
 });

@@ -1,4 +1,4 @@
-import { action, makeObservable, observable } from "mobx";
+import { action, makeObservable, observable, toJS } from "mobx";
 import type { ICartStore, CartItems } from "./types";
 import type { IRootStore } from "../types";
 import type { Product } from "../productsStore/types";
@@ -46,7 +46,7 @@ export default class CartStore implements ICartStore {
       ).toFixed(2);
     }
     return this.discountedProduct
-      ? (this.totalCartItems - this.discountedProduct?.price).toFixed(2)
+      ? (this.totalValueOfCartItems - this.discountedProduct?.price).toFixed(2)
       : "";
   }
 

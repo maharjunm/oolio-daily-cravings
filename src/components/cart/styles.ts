@@ -6,7 +6,7 @@ import { BaseText } from "../../ui-library/typography";
 export const CartContainer = styled(Flex)`
   background: white;
   padding: 16px;
-  min-width: 450px;
+  min-width: 400px;
   max-height: 600px;
 `;
 

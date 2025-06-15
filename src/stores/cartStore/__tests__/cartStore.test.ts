@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { enableStaticRendering } from "mobx-react-lite";
 import { autorun } from "mobx";
-import CartStore from "..";
+import CartStore, { COUPON_CODES } from "..";
 
 const mockProduct1 = { id: "p1", name: "Apple", price: 1.5 };
 const mockProduct2 = { id: "p2", name: "Banana", price: 0.75 };
@@ -205,5 +205,113 @@ describe("CartStore", () => {
     expect(totalValue).toBe(3.75);
 
     disposer();
+  });
+
+  describe("applyCoupon", () => {
+    it("should set validCoupon to true for HAPPYHOURS coupon", () => {
+      cartStore.coupon.code = COUPON_CODES.HAPPYHOURS;
+      cartStore.applyCoupon();
+      expect(cartStore.validCoupon).toBe(true);
+      expect(cartStore.discountedProduct).toBeUndefined();
+    });
+
+    describe("BUYGETONE coupon", () => {
+      it("should set validCoupon to true and discountedProduct if totalCartItems > 2", () => {
+        cartStore.increaseCartItemCount("p1");
+        cartStore.increaseCartItemCount("p2");
+        cartStore.increaseCartItemCount("p3");
+        cartStore.coupon.code = COUPON_CODES.BUYGETONE;
+        cartStore.applyCoupon();
+
+        expect(cartStore.validCoupon).toBe(true);
+        expect(cartStore.discountedProduct).toEqual(mockProduct2);
+      });
+
+      it("should NOT apply BUYGETONE coupon if totalCartItems <= 2", () => {
+        cartStore.increaseCartItemCount("p1");
+        cartStore.increaseCartItemCount("p3");
+        cartStore.coupon.code = COUPON_CODES.BUYGETONE;
+        cartStore.applyCoupon();
+
+        expect(cartStore.validCoupon).toBe(false);
+        expect(cartStore.discountedProduct).toBeUndefined();
+      });
+
+      it("should correctly identify the lowest priced item even with varying quantities", () => {
+        cartStore.increaseCartItemCount("p1");
+        cartStore.increaseCartItemCount("p1");
+        cartStore.increaseCartItemCount("p3");
+        cartStore.increaseCartItemCount("p4");
+        cartStore.coupon.code = COUPON_CODES.BUYGETONE;
+        cartStore.applyCoupon();
+
+        expect(cartStore.validCoupon).toBe(true);
+        expect(cartStore.discountedProduct).toEqual(mockProduct1);
+      });
+    });
+
+    it("should do nothing for an invalid coupon code", () => {
+      cartStore.coupon.code = "INVALID_CODE";
+      cartStore.applyCoupon();
+      expect(cartStore.validCoupon).toBe(false);
+      expect(cartStore.discountedProduct).toBeUndefined();
+    });
+  });
+
+  describe("disountedTotal getter", () => {
+    it("should return empty string if no coupon is applied", () => {
+      cartStore.increaseCartItemCount("p1");
+      expect(cartStore.disountedTotal).toBe("");
+    });
+
+    it("should calculate 18% discount for HAPPYHOURS", () => {
+      cartStore.increaseCartItemCount("p1");
+      cartStore.increaseCartItemCount("p3");
+      cartStore.increaseCartItemCount("p3");
+      cartStore.coupon.code = COUPON_CODES.HAPPYHOURS;
+      cartStore.applyCoupon();
+
+      const expectedDiscount = (5.5 - 5.5 * 0.18).toFixed(2);
+      expect(cartStore.disountedTotal).toBe(expectedDiscount); // 4.51
+    });
+
+    it("should calculate discount based on lowest priced item for BUYGETONE", () => {
+      cartStore.increaseCartItemCount("p1");
+      cartStore.increaseCartItemCount("p2");
+      cartStore.increaseCartItemCount("p3");
+      cartStore.coupon.code = COUPON_CODES.BUYGETONE;
+      cartStore.applyCoupon();
+
+      const expectedDiscount = (4.25 - 0.75).toFixed(2);
+      expect(cartStore.disountedTotal).toBe(expectedDiscount);
+    });
+
+    it("should return empty string if BUYGETONE is applied but discountedProduct is undefined (e.g., totalCartItems <= 2)", () => {
+      cartStore.increaseCartItemCount("p1");
+      cartStore.coupon.code = COUPON_CODES.BUYGETONE;
+      cartStore.applyCoupon();
+
+      expect(cartStore.disountedTotal).toBe("");
+    });
+  });
+
+  it("should reactively update disountedTotal when cart items or coupon change", () => {
+
+    expect(cartStore.disountedTotal).toBe("");
+
+    cartStore.increaseCartItemCount("p1");
+    cartStore.coupon.code = COUPON_CODES.HAPPYHOURS;
+    cartStore.applyCoupon();
+
+    expect(cartStore.disountedTotal).toBe((1.5 - 1.5 * 0.18).toFixed(2));
+
+    cartStore.resetStore();
+    cartStore.increaseCartItemCount("p1");
+    cartStore.increaseCartItemCount("p2");
+    cartStore.increaseCartItemCount("p3");
+    cartStore.coupon.code = COUPON_CODES.BUYGETONE;
+    cartStore.applyCoupon();
+
+    expect(cartStore.disountedTotal).toBe((4.25 - 0.75).toFixed(2));
   });
 });

@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { render, screen, fireEvent } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import { observable } from "mobx";
 import { Provider } from "mobx-react";
-
-import { Cart } from "..";
+import { CartCouponCode } from "../cartCouponCode";
 
 const mockRemoveItemFromCart = jest.fn();
 const mockGetProductById = jest.fn();
@@ -13,8 +11,7 @@ const mockPlaceOrder = jest.fn();
 let mockProductsStore: any;
 let mockCartStore: any;
 let mockOrderStore: any;
-
-describe("Cart Component", () => {
+describe("CartCouponCode", () => {
   const MOCK_PRODUCTS = [
     {
       id: "prod1",
@@ -49,13 +46,12 @@ describe("Cart Component", () => {
       increaseCartItemCount: jest.fn(),
       decreaseCartItemCount: jest.fn(),
       removeItemFromCart: mockRemoveItemFromCart,
-      validCoupon: true,
       coupon: {
+        code: "",
         errorMessage: "",
         successMessage: "",
-        code: "",
       },
-      disountedTotal: 2.4,
+      updateMessage: jest.fn(),
       get totalCartItems() {
         return 3;
       },
@@ -81,50 +77,27 @@ describe("Cart Component", () => {
       orderStore: mockOrderStore,
     };
   });
-
-  const renderWithProvider = () => {
+  const renderWithProvider = (store?: any) => {
     return render(
-      <Provider {...fullMockRootStore}>
-        <Cart />
+      <Provider {...fullMockRootStore} {...(store || {})}>
+        <CartCouponCode />
       </Provider>
     );
   };
 
-  it("should render cart items when totalCartItems is greater than 0", () => {
-    mockCartStore.cartItems = { prod1: 2, prod2: 1 };
-
+  it("renders correctly with initial state", () => {
     renderWithProvider();
 
-    expect(screen.getByText("Your Cart (3)")).toBeTruthy();
+    expect(screen.getByText("Have a coupon code?")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Enter coupon code")).toHaveValue("");
   });
 
-  it("should call removeItemFromCart when remove button in CartItem is clicked", () => {
-    mockCartStore.cartItems = { prod1: 2, prod2: 1 };
+  it("updates coupon code input value in store", () => {
     renderWithProvider();
 
-    const removeButton = screen.getByTestId("remove-item-prod1");
-    fireEvent.click(removeButton);
+    const input = screen.getByPlaceholderText("Enter coupon code");
+    fireEvent.change(input, { target: { value: "NEWCODE" } });
 
-    expect(mockRemoveItemFromCart).toHaveBeenCalledTimes(1);
-    expect(mockRemoveItemFromCart).toHaveBeenCalledWith("prod1");
-  });
-
-  it('should call placeOrder when "Confirm Order" button is clicked', () => {
-    renderWithProvider();
-
-    const confirmButton = screen.getByText("Confirm Order");
-    fireEvent.click(confirmButton);
-
-    expect(mockPlaceOrder).toHaveBeenCalledTimes(1);
-  });
-
-  it('should disable "Confirm Order" button when orderPreview is "loading"', () => {
-    mockCartStore.cartItems = { prod1: 1, prod2: 1 };
-    mockOrderStore.orderPreview = "loading";
-
-    renderWithProvider();
-
-    const confirmButton = screen.getByText("Confirm Order");
-    expect(confirmButton).toBeDisabled();
+    expect(mockCartStore.updateMessage).toHaveBeenCalledWith("code", "NEWCODE");
   });
 });
