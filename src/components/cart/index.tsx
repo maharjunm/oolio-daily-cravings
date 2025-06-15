@@ -86,7 +86,7 @@ export const Cart = observer(() => {
             <Button
               onClick={placeOrder}
               disabled={totalCartItems === 0 || orderPreview === "loading"}
-              name="Confirm Your Order"
+              name="Confirm Order"
               isPrimary
             />
           </Flex>

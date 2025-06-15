@@ -2,7 +2,7 @@ import { observer } from "mobx-react";
 import { LoaderBar, StyledLoader } from "./styles";
 import useStores from "../../stores/useStores";
 
-export const SpinnerLoader = () => <StyledLoader />;
+export const SpinnerLoader = () => <StyledLoader/>;
 
 export const GlobalLoader = observer(() => {
   const {

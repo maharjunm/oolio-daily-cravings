@@ -2,24 +2,21 @@ import { observer } from "mobx-react";
 import Img from "../../assets/icons/img";
 import { theme } from "../../assets/styles/theme";
 import { Button } from "../../ui-library/button";
-import { Flex } from "../../ui-library/flex";
 import { Modal } from "../../ui-library/modal";
 import {
   BaseText,
   H1,
   SmallText,
-  XSmallText,
 } from "../../ui-library/typography";
 import {
   BreakLine,
   Container,
-  Icon,
-  ItemContainer,
   ItemsContainer,
   OrderContainer,
 } from "./styles";
 import useStores from "../../stores/useStores";
 import { OrderTotal } from "../common/orderTotal";
+import { Order } from "./order";
 
 export const OrderConfirmation = observer(
   ({ onClose }: { onClose: () => void }) => {
@@ -47,59 +44,18 @@ export const OrderConfirmation = observer(
                 const item = productsStore.getProductById(id);
                 if (item) {
                   return (
-                    <Flex flexDirection="column">
-                      <ItemContainer
-                        isLast={isLast}
-                        flexGrow
-                        justifyContent="space-between"
-                        alignItemsCenter
-                      >
-                        <Flex gap="0.5rem">
-                          <img
-                            height={"48px"}
-                            width={"48px"}
-                            src={item.image.desktop}
-                          />
-                          <Flex flexDirection="column" gap="0.25rem">
-                            <XSmallText fontWeight={600}>
-                              {item.name}
-                            </XSmallText>
-                            <Flex alignItemsCenter gap="0.5rem">
-                              <BaseText
-                                color={theme.countTextColor}
-                                fontWeight={600}
-                              >
-                                {cartStore?.cartItems
-                                  ? cartStore?.cartItems[id]
-                                  : ""}
-                                x
-                              </BaseText>
-                              <Flex alignItemsCenter>
-                                <Icon
-                                  color={theme.colorTextDescriptionSecondary}
-                                  fontWeight={600}
-                                >
-                                  @
-                                </Icon>
-                                <XSmallText
-                                  color={theme.colorTextDescriptionSecondary}
-                                  fontWeight={600}
-                                >
-                                  ${item.price}
-                                </XSmallText>
-                              </Flex>
-                            </Flex>
-                          </Flex>
-                        </Flex>
-                        <BaseText fontWeight={600}>
-                          $
-                          {cartStore?.cartItems
-                            ? cartStore?.cartItems[id] * item.price
-                            : 0}
-                        </BaseText>
-                      </ItemContainer>
-                      {isLast ? null : <BreakLine alignSelfCenter />}
-                    </Flex>
+                    <Order
+                      isLast={isLast}
+                      item={item}
+                      count={
+                        cartStore?.cartItems ? cartStore?.cartItems[id] : 0
+                      }
+                      price={
+                        cartStore?.cartItems
+                          ? cartStore?.cartItems[id] * item.price
+                          : 0
+                      }
+                    />
                   );
                 } else {
                   return null;

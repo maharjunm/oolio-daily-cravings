@@ -5,8 +5,6 @@ import { observer } from "mobx-react";
 import { useOrderConfirmation } from "./components/orders/hooks/useOrderConfirmation";
 
 const App = observer(() => {
-  
-  
   const { modal } = useOrderConfirmation();
 
   return (

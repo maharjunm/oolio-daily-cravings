@@ -8,6 +8,7 @@ interface Props {
   count: number;
   price: number;
   isLast: boolean;
+  id: string;
   removeItemFromCart: () => void;
 }
 
@@ -16,6 +17,7 @@ export const CartItem = ({
   count,
   price,
   isLast,
+  id,
   removeItemFromCart,
 }: Props) => {
   return (
@@ -45,7 +47,7 @@ export const CartItem = ({
             </Flex>
           </Flex>
         </Flex>
-        <CrossIconContainer onClick={removeItemFromCart} centered>
+        <CrossIconContainer data-testid={`remove-item-${id}`} onClick={removeItemFromCart} centered>
           <Icon color={theme.colorBorderSecondary}>{"x"}</Icon>
         </CrossIconContainer>
       </ItemContainer>

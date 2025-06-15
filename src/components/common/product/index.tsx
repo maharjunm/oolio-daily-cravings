@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import Img, { type IconNames } from "../../../assets/icons/img";
+import Img from "../../../assets/icons/img";
 import { theme } from "../../../assets/styles/theme";
 import { Button } from "../../../ui-library/button";
 import { Flex } from "../../../ui-library/flex";

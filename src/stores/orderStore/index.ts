@@ -31,11 +31,10 @@ export default class OrderStore implements IOrderStore {
           couponCode: "",
           items,
         });
+        this.orderPreview = "loaded";
       } catch (e) {
         this.orderPreview = "failed";
         throw e;
-      } finally {
-        this.orderPreview = "loaded";
       }
     }
   }

@@ -13,11 +13,10 @@ export default class ProductsStore implements IProductsStore {
       this.productsPreview = "loading";
       const response = await axiosInstance.get("/products");
       this.products = response.data;
+      this.productsPreview = "loaded";
     } catch (e) {
       this.productsPreview = "failed";
       throw e;
-    } finally {
-      this.productsPreview = "loaded";
     }
   }
 

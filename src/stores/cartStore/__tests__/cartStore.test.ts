@@ -21,7 +21,6 @@ const mockRootStore = {
 enableStaticRendering(true);
 
 describe("CartStore", () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let cartStore: any;
 
   beforeEach(() => {
