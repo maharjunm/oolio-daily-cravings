@@ -16,9 +16,10 @@ export const Home = observer(() => {
   const {
     cartStore: { totalCartItems },
   } = useStores();
+  const flexGrow = isTablet || isMobile ? { flexGrow: true } : {};
   return (
     <Flex gap="1rem" flexGrow>
-      <Flex flexGrow flexDirection="column" gap="0.5rem">
+      <Flex {...flexGrow} flexDirection="column" gap="0.5rem">
         <Flex flexGrow justifyContent="space-between">
           <H1>Desserts</H1>
           {isMobile || isTablet ? (

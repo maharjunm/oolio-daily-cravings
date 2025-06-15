@@ -1,4 +1,4 @@
-import { action, makeObservable, observable, toJS } from "mobx";
+import { action, makeObservable, observable } from "mobx";
 import type { ICartStore, CartItems } from "./types";
 import type { IRootStore } from "../types";
 import type { Product } from "../productsStore/types";

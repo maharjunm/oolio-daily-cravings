@@ -27,8 +27,8 @@ export const StyledButton = styled.button<{
         border: 1px solid ${theme.colorBorderPrimary};
         `
       : `
-        height: 44px;
-        width: 160px;
+        height: ${height || "44px"};
+        width: ${width || "160px"};
         background: ${theme.bgColorSecondary};
         border: 1px solid ${theme.colorBorderSecondary};
         `;

@@ -8,6 +8,7 @@ export const CartContainer = styled(Flex)`
   padding: 16px;
   min-width: 400px;
   max-height: 600px;
+  height: 100%;
 `;
 
 export const EmptyCartContainer = styled(Flex)`

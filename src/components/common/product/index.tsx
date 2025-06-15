@@ -47,6 +47,8 @@ export const Product = observer((props: Props) => {
   let imagePreview = image.thumbnail;
   let height = "100px";
   let width = "100px";
+  let buttonHeight = "25px";
+  let buttonWidth = "120px";
   if (isMobile) {
     height = "150px";
     width = "150px";
@@ -54,8 +56,12 @@ export const Product = observer((props: Props) => {
   } else if (isTablet) {
     height = "200px";
     width = "200px";
+    buttonHeight = "35px";
+    buttonWidth = "140px";
     imagePreview = image.tablet;
   } else if (isDesktop) {
+    buttonHeight = "44px";
+    buttonWidth = "140px";
     height = "240px";
     width = "240px";
     imagePreview = image.desktop;
@@ -64,16 +70,22 @@ export const Product = observer((props: Props) => {
   return (
     <Flex flexDirection="column" gap="1.5rem">
       <ProductContainer
+        isTablet={isTablet}
+        isMobile={isMobile}
         isSelected={!!isSelected}
         flexDirection="column"
         gap="1rem"
       >
         <img height={height} width={width} src={imagePreview} />
-        <ButtonContainer justifyContentCenter>
+        <ButtonContainer
+          isTablet={isTablet}
+          isMobile={isMobile}
+          justifyContentCenter
+        >
           <Button
             disabled={disabled}
-            height="44px"
-            width="160px"
+            height={buttonHeight}
+            width={buttonWidth}
             isPrimary={isSelected}
             onClick={!isSelected ? increaseCartItemCount : () => {}}
             name={
@@ -89,10 +101,18 @@ export const Product = observer((props: Props) => {
                 </Flex>
               ) : (
                 <Flex centered gap="0.5rem">
-                  <Img name="add-cart" />
-                  <BaseText color={theme.colorTextPrimary}>
-                    Add to Cart
-                  </BaseText>
+                  {isMobile ? (
+                    <XSmallText color={theme.colorTextPrimary}>
+                      Add to Cart
+                    </XSmallText>
+                  ) : (
+                    <>
+                      <Img name="add-cart" />
+                      <BaseText color={theme.colorTextPrimary}>
+                        Add to Cart
+                      </BaseText>
+                    </>
+                  )}
                 </Flex>
               )
             }
@@ -103,12 +123,25 @@ export const Product = observer((props: Props) => {
         <XSmallText color={theme.colorTextDescription} fontWeight={600}>
           {category}
         </XSmallText>
-        <BaseText color={theme.colorTextPrimary} fontWeight={600}>
-          {name}
-        </BaseText>
-        <BaseText color={theme.buttonTextPrimary} fontWeight={600}>
-          ${price}
-        </BaseText>
+        {isMobile ? (
+          <>
+            <SmallText color={theme.colorTextPrimary} fontWeight={600}>
+              {name}
+            </SmallText>
+            <SmallText color={theme.buttonTextPrimary} fontWeight={600}>
+              ${price}
+            </SmallText>
+          </>
+        ) : (
+          <>
+            <BaseText color={theme.colorTextPrimary} fontWeight={600}>
+              {name}
+            </BaseText>
+            <BaseText color={theme.buttonTextPrimary} fontWeight={600}>
+              ${price}
+            </BaseText>
+          </>
+        )}
       </Flex>
     </Flex>
   );
