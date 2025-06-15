@@ -1,75 +1,41 @@
 # OOLIO DAILY CRAVINGS App
 This is a modern web application built with `React` and `Vite`, designed to showcase a simple e-commerce flow for ordering food/desserts. It integrates with a separate Express.js backend to manage product listings and order processing.
 
-## Features
-### Product Listing:
-View a list of available products (e.g., desserts, food items).
+### Features
+* Product Listing: View a list of available products (e.g., desserts, food items).
+* Add to Cart: Add products to your shopping cart.
 
-### Add to Cart: 
-Add products to your shopping cart.
-
-### Quantity Management: 
+* Quantity Management: 
 Increase or decrease the quantity of items in the cart.
 
-### Remove from Cart: 
-Remove items from the cart entirely.
+* Remove from Cart: Remove items from the cart entirely.
 
-### Coupon Application: 
-  Apply discount codes (e.g., `HAPPYHOURS`, `BUYGETONE`) for special offers.
+* Coupon Application: Apply discount codes (e.g., `HAPPYHOURS`, `BUYGETONE`) for special offers.
 
-### Order Placement: 
-  Confirm your order, which then communicates with the backend.
+* Order Placement: Confirm your order, which then communicates with the backend.
 
-### Responsive Design: 
-Adapts to different screen sizes.
+* Responsive Design: Adapts to different screen sizes.
 
-### Global Loading Indicator: 
-  Provides visual feedback during API calls.
+* Global Loading Indicator: Provides visual feedback during API calls.
 
-### MobX State Management: 
-  Efficiently manages application state.
+* MobX State Management: Efficiently manages application state.
 
-# Technologies Used
-## Frontend
-### React:
-A JavaScript library for building user interfaces.
+## Technologies Used
+### Frontend
+* React: A JavaScript library for building user interfaces.
+* TypeScript: A superset of JavaScript that adds static typing.
+* MobX: A battle-tested library for reactive state management.
+* styled-components: For writing CSS in JavaScript.
+* Axios: Promise-based HTTP client for the browser and Node.js.
+* React Testing Library: For writing maintainable and robust UI tests.
+* Jest: A JavaScript Testing Framework.
 
-### TypeScript: 
-  A superset of JavaScript that adds static typing.
-
-### MobX: 
-  A battle-tested library for reactive state management.
-
-### mobx-react / mobx-react-lite:
-  Bindings for MobX with React.
-
-### styled-components:
-  For writing CSS in JavaScript.
-
-### Axios: 
-  Promise-based HTTP client for the browser and Node.js.
-
-### React Testing Library: 
-  For writing maintainable and robust UI tests.
-
-### Jest: 
-  A JavaScript Testing Framework.
-
-## Backend (Express.js API)
-### Node.js: 
-  JavaScript runtime.
-
-### Express.js: 
-  Fast, unopinionated, minimalist web framework for Node.js.
-
-### TypeScript:
-  For type-safe backend development.
-
-### CORS:
-  Middleware for enabling Cross-Origin Resource Sharing.
-
-### Axios:
-  Used by the backend to call external APIs (e.g., for product data).
+### Backend (Express.js API)
+* Node.js: JavaScript runtime.
+* Express.js: Fast, unopinionated, minimalist web framework for Node.js.
+* TypeScript: For type-safe backend development.
+* CORS: Middleware for enabling Cross-Origin Resource Sharing.
+* Axios: Used by the backend to call external APIs (e.g., for product data).
 
 ## Getting Started
 Follow these steps to get the application running on your local machine.
