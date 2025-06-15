@@ -43,6 +43,8 @@ Follow these steps to get the application running on your local machine.
 1. Backend Setup
 You need to have the Express.js backend running first, as the frontend will communicate with it.
 
+#### Node.js (v20 or higher recommended)
+
 #### Navigate to your backend project directory:
 
 ```
